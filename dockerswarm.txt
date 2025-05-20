@@ -1,0 +1,55 @@
+3 vms 
+vm1 (server)=
+
+ sudo apt update 
+ sudo apt install docker.io -y 
+sudo usermod star -aG docker 
+cat /etc/group 
+
+mkdir project 
+cd project 
+nano Dockerfile 
+		FROM ubuntu/apache2
+		COPY * /var/www/html
+
+sudo nano index.html
+docker pull ubuntu/apache2
+
+
+MAKE A REPO ON DOCKERHUB 
+	
+docker build -t nehanikhare/reponame:lates .
+docker login 
+docker push nehanikhare/reponame 
+docker run --name myengine -d -p 80:80 nehanikhare/reponame
+
+
+
+vm2(client )
+sudo apt update 
+sudo apt install docker.io -y 
+docker pull nehanikhare/reponame :latest 
+docker run --name  reponame -d -p 80:80 nehanikhare/reponame 
+browser-192.168.56.201(vm2 ip )
+
+
+vm3(client )
+sudo apt update 
+sudo apt install docker.io -y 
+docker pull nehanikhare/reponame :latest 
+docker run --name  reponame -d -p 80:80 nehanikhare/reponame 
+browser-192.168.56.202(vm3 ip )
+
+vm1(server)
+docker swarm init --advertise-addr-192.168.26.200
+copy token key 
+docker node ls (after paste to client do this step )
+docker run --name reponame -d -p 80:80 nehanikhare/reponame:latest
+docker service create --name myservice -d -p 80:80 --replicas=3 nehanikhare/reponame:latest
+docker ps 
+
+vm2,vm3
+paste token key 
+docker ps 
+
+
